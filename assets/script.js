@@ -47,7 +47,7 @@ $(function () {
     });
 
     //make the history clickable
-    $(weatherList).click(function() {
+    $(".searchHistory").click(function() {
         getWeatherData();
     });
 
