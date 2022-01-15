@@ -29,7 +29,8 @@ $(function () {
     let currentHour = today.getHours();
     $("#currentDay").text(moment().format("Do MMMM YYYY"));
 
-
+    //grab the text
+    $(".search-box").text();
 
     //add functionality to the search button
     $(".search-btn").submit(function() {
