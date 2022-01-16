@@ -11,7 +11,7 @@ $(function () {
     //set up the api info
     var getWeatherData = function () {
         //format the weather api
-        var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat={42.4859}&lon={83.1052}&exclude={minutely, hourly, alerts}&appid={4bfcf3f737f250cacc137acee1f02832}";
+        var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=41.881832&lon=-87.623177&appid=4bfcf3f737f250cacc137acee1f02832";
         // make a get request to url
         fetch(apiUrl).then(function(response) {
             console.log(response);
