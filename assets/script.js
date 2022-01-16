@@ -1,6 +1,7 @@
 $(function () {
 
     //get search items from local storage. Use if to set to an empty list if null so there is always a list.
+    //create a list of searched for cities pulled from local storage and set them into a list
     let weatherList = localStorage.getItem("searchKeyStorage");
     if (weatherList === null) {
         weatherList = []
@@ -21,6 +22,13 @@ $(function () {
         });
     };
     //call the api
+    //this will:
+        //pull the city and the current day info
+        //give a daily forecast including:
+            //an icon representation of weather conditions, temp, humidity, wind speed, and UV index
+            //UV index will present with a color indicating if conditions are favorable, moderate, or severe
+        //fulls a five day future forecast
+            //five day will dispaly date, icon, temp, humidity, wind speed
     getWeatherData()
 
 
@@ -29,26 +37,21 @@ $(function () {
     let currentHour = today.getHours();
     $("#currentDay").text(moment().format("Do MMMM YYYY"));
 
-    //grab the text
-    $(".search-box").text();
 
     //add functionality to the search button
-    $(".search-btn").submit(function() {
-        //creates an empty list
-        var searchList = [];
+    //saves searched cities to localStorage
+    //call getWeatherData
+    $("#search-form").submit(function() {
+        //grabs the text
+        var searchText = $("#search-box").val();
 
-        //creates a key for setItem
-        var searchListKey = "searchList";
-        //setting search items into a list
-        for (var i = 0; i < searchVar.length; i++) {
-            searchList[i] = $(searchVar[i]).val();
-        };
         //save to localStorage
-        localStorage.setItem("searchKeyStorage", JSON,stringify(searchList));
+        localStorage.setItem("searchKeyStorage", JSON,stringify(searchText));
     });
 
     //make the history clickable
-    $(".searchHistory").click(function() {
+    //take list of cities (search history) and add a click function so I you click one, it activates the getWeatherData function
+    $("#searchHistory").click(function() {
         getWeatherData();
     });
 
