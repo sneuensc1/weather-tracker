@@ -51,7 +51,14 @@ $(function () {
     $("#currentDay").text(moment().format("Do MMMM YYYY"));
 
 
-    
+    var showSearchHistory = function() {
+        var cityList = "";
+        for (var i = 0; i < weatherList.length; i++) {
+            showSearchHistory += "<li>" + weatherList[i] + "</li>";
+        }
+        searchedCities.innerHTML = showSearchHistory
+        }
+    });
 
     //updates HTML with information from the search bar
     var saveSearch = function(searchText) {
@@ -59,22 +66,14 @@ $(function () {
         weatherList.push(searchText);
         //save to localStorage
         localStorage.setItem("searchKeyStorage", JSON.stringify(weatherList));
-        //display list of searched for cities
-        var displayCities = function() {
-            var cityList = "";
-            for (var i = 0; i < weatherList.length; i++) {
-                displayCities += "<li>" + weatherList[i] + "</li>";
-            }
-            searchedCities.innerHTML = displayCities
-            }
-    };
 
     //add functionality to the search button
-        //saves searched cities to localStorage
-        //call getWeatherData
-        $("#search-form").submit(function() {
-            //grabs the text
-            saveSearch();
+    //saves searched cities to localStorage
+    //call getWeatherData
+    $("#search-form").submit(function() {
+    //grabs the text
+        saveSearch();
+        showSearchHistory();
         });
 
 
@@ -88,5 +87,5 @@ $(function () {
 
 
 
-});
+};
 
