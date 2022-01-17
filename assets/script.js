@@ -62,7 +62,7 @@ $(function () {
         //display list of searched for cities
         var displayCities = function() {
             var cityList = "";
-            for (var i = 00; i < weatherList.length; i++) {
+            for (var i = 0; i < weatherList.length; i++) {
                 displayCities += "<li>" + weatherList[i] + "</li>";
             }
             searchedCities.innerHTML = displayCities
