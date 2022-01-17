@@ -10,6 +10,8 @@ $(function () {
     }
 
     var searchedCities = document.getElementById("searchHistory");
+
+    var searchText = $("#search-box").val();
     
     //set up the api info
     var getWeatherData = function () {
@@ -49,12 +51,10 @@ $(function () {
     $("#currentDay").text(moment().format("Do MMMM YYYY"));
 
 
-    //add functionality to the search button
-    //saves searched cities to localStorage
-    //call getWeatherData
-    $("#search-form").submit(function() {
-        //grabs the text
-        var searchText = $("#search-box").val();
+    
+
+    //updates HTML with information from the search bar
+    var saveSearch = function(searchText) {
         //adds text to existing list of searched for cities
         weatherList.push(searchText);
         //save to localStorage
@@ -67,7 +67,17 @@ $(function () {
             }
             searchedCities.innerHTML = displayCities
             }
-    });
+    };
+
+    //add functionality to the search button
+        //saves searched cities to localStorage
+        //call getWeatherData
+        $("#search-form").submit(function() {
+            //grabs the text
+            saveSearch();
+        });
+
+
 
     //make the history clickable
     //take list of cities (search history) and add a click function so I you click one, it activates the getWeatherData function
