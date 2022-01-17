@@ -71,7 +71,7 @@ $(function () {
         var searchText = $("#search-box").val().trim();
         saveSearch(searchText);
         showSearchHistory();
-        getWeatherData();
+        getWeatherData(searchText);
     });
 
 
@@ -81,8 +81,7 @@ $(function () {
    $("#searchHistory").click(function(event) {
      
     //get the text of the search
-    event.target.innerText;
-    getWeatherData();
+    getWeatherData(event.target.innerText);
     });
 
 
