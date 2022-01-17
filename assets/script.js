@@ -9,6 +9,8 @@ $(function () {
         weatherList = JSON.parse(weatherList);
     }
 
+    var searchedCities = document.getElementById("searchHistory");
+    
     //set up the api info
     var getWeatherData = function () {
         //format the weather api
@@ -54,9 +56,17 @@ $(function () {
         //grabs the text
         var searchText = $("#search-box").val();
         //adds text to existing list of searched for cities
-        weatherList.append(searchText);
+        weatherList.push(searchText);
         //save to localStorage
-        localStorage.setItem("searchKeyStorage", JSON,stringify(weatherList));
+        localStorage.setItem("searchKeyStorage", JSON.stringify(weatherList));
+        //display list of searched for cities
+        var displayCities = function() {
+            var cityList = "";
+            for (var i = 00; i < weatherList.length; i++) {
+                displayCities += "<li>" + weatherList[i] + "</li>";
+            }
+            searchedCities.innerHTML = displayCities
+            }
     });
 
     //make the history clickable
@@ -68,5 +78,5 @@ $(function () {
 
 
 
-})
+});
 
