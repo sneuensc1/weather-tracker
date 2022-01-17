@@ -11,7 +11,7 @@ $(function () {
 
     var searchedCities = document.getElementById("searchHistory");
 
-    var searchText = $("#search-box").val();
+    
     
     //set up the api info
     var getWeatherData = function () {
@@ -52,17 +52,9 @@ $(function () {
     var showSearchHistory = function() {
         var cityList = "";
         for (var i = 0; i < weatherList.length; i++) {
-            showSearchHistory += "<li>" + weatherList[i] + "</li>";
+            cityList += "<li>" + weatherList[i] + "</li>";
         }
-        searchedCities.innerHTML = showSearchHistory
-    };
-   
-    var showSearchHistory = function() {
-        var cityList = "";
-        for (var i = 0; i < weatherList.length; i++) {
-            showSearchHistory += "<li>" + weatherList[i] + "</li>";
-        }
-        searchedCities.innerHTML = showSearchHistory
+        searchedCities.innerHTML = cityList;
     };
 
     //updates HTML with information from the search bar
@@ -76,9 +68,11 @@ $(function () {
     //add functionality to the search button
     //saves searched cities to localStorage
     //call getWeatherData
-    $("#search-form").submit(function() {
+    $("#search-form").submit(function(event) {
+        event.preventDefault();
         //grabs the text
-        saveSearch();
+        var searchText = $("#search-box").val();
+        saveSearch(searchText);
         showSearchHistory();
     });
 
