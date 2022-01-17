@@ -29,7 +29,16 @@ $(function () {
             //UV index will present with a color indicating if conditions are favorable, moderate, or severe
         //fulls a five day future forecast
             //five day will dispaly date, icon, temp, humidity, wind speed
-    getWeatherData()
+    var getWeatherData = function(searchText) {};
+
+    //updates HTML with information from the search bar
+    var saveSearch = function(searchText) {};
+
+    //updates localStorage with the information from the search bar
+    var saveSearchLocalStorage = function (searchText) {};
+
+
+
 
 
     //pulls the current date and time when the page opens
@@ -44,9 +53,10 @@ $(function () {
     $("#search-form").submit(function() {
         //grabs the text
         var searchText = $("#search-box").val();
-
+        //adds text to existing list of searched for cities
+        weatherList.append(searchText);
         //save to localStorage
-        localStorage.setItem("searchKeyStorage", JSON,stringify(searchText));
+        localStorage.setItem("searchKeyStorage", JSON,stringify(weatherList));
     });
 
     //make the history clickable
