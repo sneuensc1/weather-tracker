@@ -14,9 +14,10 @@ $(function () {
     
     
     //set up the api info
-    var getWeatherData = function () {
+    var getWeatherData = function (cityName) {
         //format the weather api
-        var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=41.881832&lon=-87.623177&appid=4bfcf3f737f250cacc137acee1f02832";
+        let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURI(cityName)}&appid=4bfcf3f737f250cacc137acee1f02832`
+        console.log(apiUrl);
         // make a get request to url
         fetch(apiUrl).then(function(response) {
             console.log(response);
@@ -33,29 +34,25 @@ $(function () {
             //UV index will present with a color indicating if conditions are favorable, moderate, or severe
         //fulls a five day future forecast
             //five day will dispaly date, icon, temp, humidity, wind speed
-    var getWeatherData = function(searchText) {};
 
     //updates localStorage with the information from the search bar
     var saveSearchLocalStorage = function (searchText) {};
 
+    var showSearchHistory = function() {
+        var cityList = "";
+        for (var i = 0; i < weatherList.length; i++) {
+            cityList += `<li> ${weatherList[i]} </li>`
+        }
+        searchedCities.innerHTML = cityList;
+    };
 
-
-
+    showSearchHistory();
 
     //pulls the current date and time when the page opens
     let today = new Date();
     let currentHour = today.getHours();
     $("#currentDay").text(moment().format("Do MMMM YYYY"));
 
-
-   
-    var showSearchHistory = function() {
-        var cityList = "";
-        for (var i = 0; i < weatherList.length; i++) {
-            cityList += "<li>" + weatherList[i] + "</li>";
-        }
-        searchedCities.innerHTML = cityList;
-    };
 
     //updates HTML with information from the search bar
     var saveSearch = function(searchText) {
@@ -71,21 +68,24 @@ $(function () {
     $("#search-form").submit(function(event) {
         event.preventDefault();
         //grabs the text
-        var searchText = $("#search-box").val();
+        var searchText = $("#search-box").val().trim();
         saveSearch(searchText);
         showSearchHistory();
+        getWeatherData();
     });
 
 
 
     //make the history clickable
     //take list of cities (search history) and add a click function so I you click one, it activates the getWeatherData function
-    $("#searchHistory").click(function() {
-        getWeatherData();
+   $("#searchHistory").click(function(event) {
+     
+    //get the text of the search
+    event.target.innerText;
+    getWeatherData();
     });
 
 
 
 
 });
-
