@@ -35,9 +35,6 @@ $(function () {
             //five day will dispaly date, icon, temp, humidity, wind speed
     var getWeatherData = function(searchText) {};
 
-    //updates HTML with information from the search bar
-    var saveSearch = function(searchText) {};
-
     //updates localStorage with the information from the search bar
     var saveSearchLocalStorage = function (searchText) {};
 
@@ -51,14 +48,22 @@ $(function () {
     $("#currentDay").text(moment().format("Do MMMM YYYY"));
 
 
+   
     var showSearchHistory = function() {
         var cityList = "";
         for (var i = 0; i < weatherList.length; i++) {
             showSearchHistory += "<li>" + weatherList[i] + "</li>";
         }
         searchedCities.innerHTML = showSearchHistory
+    };
+   
+    var showSearchHistory = function() {
+        var cityList = "";
+        for (var i = 0; i < weatherList.length; i++) {
+            showSearchHistory += "<li>" + weatherList[i] + "</li>";
         }
-    });
+        searchedCities.innerHTML = showSearchHistory
+    };
 
     //updates HTML with information from the search bar
     var saveSearch = function(searchText) {
@@ -66,15 +71,16 @@ $(function () {
         weatherList.push(searchText);
         //save to localStorage
         localStorage.setItem("searchKeyStorage", JSON.stringify(weatherList));
+    };
 
     //add functionality to the search button
     //saves searched cities to localStorage
     //call getWeatherData
     $("#search-form").submit(function() {
-    //grabs the text
+        //grabs the text
         saveSearch();
         showSearchHistory();
-        });
+    });
 
 
 
@@ -87,5 +93,5 @@ $(function () {
 
 
 
-};
+});
 
