@@ -26,7 +26,18 @@ $(function () {
             });
         });
     };
-    //call the api
+    //set up the second api call
+    var fiveDayWeather = function (cityName) {
+        //format the 5 day api
+        let apiURL2 = 'https://api.openweathermap.org/data/2.5/forecast?q=${encodeURI(cityName)}&appid=4bfcf3f737f250cacc137acee1f02832'
+        //make a fetch request
+        fetch(apiURL2).then(function(response) {
+            console.log(response);
+            response.JSON().then(function(data) {
+                console.log(data);
+            });
+        });
+    };
     //this will:
         //pull the city and the current day info
         //give a daily forecast including:
@@ -72,6 +83,7 @@ $(function () {
         saveSearch(searchText);
         showSearchHistory();
         getWeatherData(searchText);
+        fiveDayWeather(searchText);
     });
 
 
@@ -82,6 +94,7 @@ $(function () {
      
     //get the text of the search
     getWeatherData(event.target.innerText);
+    fiveDayWeather(event.target.innerText);
     });
 
 
