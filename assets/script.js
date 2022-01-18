@@ -11,6 +11,8 @@ $(function () {
 
     var searchedCities = document.getElementById("searchHistory");
 
+   
+
     
     
     //set up the api info
@@ -19,17 +21,22 @@ $(function () {
         let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURI(cityName)}&appid=4bfcf3f737f250cacc137acee1f02832`
         console.log(apiUrl);
         // make a get request to url
-        fetch(apiUrl).then(function(response) {
-            console.log(response);
-            response.json().then(function(data) {
-                console.log(data);
-            });
-        });
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => displayWeather(data));
     };
+
+    var displayWeather = function(currentWeather) {
+        // what will the weather json be in here?
+        currentWeather.weather.icon;
+        currentWeather.main.temp;
+        currentWeather.wind.speed
+    };
+
     //set up the second api call
     var fiveDayWeather = function (cityName) {
         //format the 5 day api
-        let apiURL2 = 'https://api.openweathermap.org/data/2.5/forecast?q=${encodeURI(cityName)}&appid=4bfcf3f737f250cacc137acee1f02832'
+        let apiURL2 = `https://api.openweathermap.org/data/2.5/forecast?q=${encodeURI(cityName)}&appid=4bfcf3f737f250cacc137acee1f02832`
         //make a fetch request
         fetch(apiURL2).then(function(response) {
             console.log(response);
@@ -62,7 +69,7 @@ $(function () {
     //pulls the current date and time when the page opens
     let today = new Date();
     let currentHour = today.getHours();
-    $("#currentDay").text(moment().format("Do MMMM YYYY"));
+    $("#monkey").text(moment().format("Do MMMM YYYY"));
 
 
     //updates HTML with information from the search bar
@@ -83,6 +90,7 @@ $(function () {
         saveSearch(searchText);
         showSearchHistory();
         getWeatherData(searchText);
+        displayWeather();
         fiveDayWeather(searchText);
     });
 
