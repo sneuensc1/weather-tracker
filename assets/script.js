@@ -33,7 +33,7 @@ $(function () {
         //make a fetch request
         fetch(apiURL2).then(function(response) {
             console.log(response);
-            response.JSON().then(function(data) {
+            response.json().then(function(data) {
                 console.log(data);
             });
         });
