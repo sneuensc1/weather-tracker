@@ -9,31 +9,29 @@ $(function () {
         weatherList = JSON.parse(weatherList);
     }
 
-    var searchedCities = document.getElementById("searchHistory");
+    var searchedCities = document.getElementById("searchHistory")
 
-   
+    //pulls the current date and time when the page opens
+    let today = new Date();
+    let currentHour = today.getHours();
+    $("#monkey").text(moment().format("Do MMMM YYYY"));
 
-    
-    
-    //set up the api info
+
+    //set up the first API call
     var getWeatherData = function (cityName) {
         //format the weather api
         let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURI(cityName)}&appid=4bfcf3f737f250cacc137acee1f02832`
         console.log(apiUrl);
         // make a get request to url
-        fetch(apiUrl)
-            .then(response => response.json())
-            .then(data => displayWeather(data));
+        fetch(apiUrl).then(function(response) {
+            console.log(response);
+            response.json().then(function(data) {
+                console.log(data);
+            });
+        });
     };
 
-    var displayWeather = function(currentWeather) {
-        // what will the weather json be in here?
-        currentWeather.weather.icon;
-        currentWeather.main.temp;
-        currentWeather.wind.speed
-    };
-
-    //set up the second api call
+    //set up the second API call
     var fiveDayWeather = function (cityName) {
         //format the 5 day api
         let apiURL2 = `https://api.openweathermap.org/data/2.5/forecast?q=${encodeURI(cityName)}&appid=4bfcf3f737f250cacc137acee1f02832`
@@ -45,6 +43,22 @@ $(function () {
             });
         });
     };
+    
+    var displayWeather = function(currentWeather) {
+        // what will the weather json be in here?
+        currentWeather.weather.icon;
+        currentWeather.main.temp;
+        currentWeather.wind.speed
+        currentWeather.current.uvi
+    };
+    
+    //fetch(`https://api.openweathermap.org/data/2.5/weather?q=${encodeURI(cityName)}&appid=4bfcf3f737f250cacc137acee1f02832`)
+      
+        //.then(response => response.json())
+      
+        //.then(data => displayWeather(data));
+
+    
     //this will:
         //pull the city and the current day info
         //give a daily forecast including:
@@ -53,9 +67,7 @@ $(function () {
         //fulls a five day future forecast
             //five day will dispaly date, icon, temp, humidity, wind speed
 
-    //updates localStorage with the information from the search bar
-    var saveSearchLocalStorage = function (searchText) {};
-
+    //Turn search history into a list
     var showSearchHistory = function() {
         var cityList = "";
         for (var i = 0; i < weatherList.length; i++) {
@@ -65,12 +77,6 @@ $(function () {
     };
 
     showSearchHistory();
-
-    //pulls the current date and time when the page opens
-    let today = new Date();
-    let currentHour = today.getHours();
-    $("#monkey").text(moment().format("Do MMMM YYYY"));
-
 
     //updates HTML with information from the search bar
     var saveSearch = function(searchText) {
@@ -90,7 +96,6 @@ $(function () {
         saveSearch(searchText);
         showSearchHistory();
         getWeatherData(searchText);
-        displayWeather();
         fiveDayWeather(searchText);
     });
 
